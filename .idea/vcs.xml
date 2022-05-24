@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/drag-and-drop-taskboard" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/frontend/react-front" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/kanban-board-app" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/react_login_form" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/spring-security-auth-proj/Spring-Security-Auth-Demo" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/tasker" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/tasker-react-sample-app" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/tasker-vue" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vue-frontend" vcs="Git" />
+  </component>
+</project>
