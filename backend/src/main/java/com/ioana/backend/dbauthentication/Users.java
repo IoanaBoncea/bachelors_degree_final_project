@@ -1,10 +1,15 @@
 package com.ioana.backend.dbauthentication;
 
+import com.ioana.backend.assign.Assignment;
+import com.ioana.backend.entity.ProfessorsCodes;
+import com.ioana.backend.task.AssignationStudentTask;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "user_table")
@@ -12,6 +17,9 @@ public class Users implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @OneToMany(mappedBy = "user", fetch =  FetchType.LAZY)
+    Set<Assignment> assignments = new HashSet<>();
 
     @Column(name="first_name")
     private String firstName;
@@ -25,15 +33,73 @@ public class Users implements UserDetails {
     @Column(name="password")
     private String password;
 
-    public Users() {
-    }
+    @Column(name="role")
+    private int role;
 
-    public Users(String firstName, String lastName, String email, String password) {
+    @Column(name="year")
+    private int year;
+
+    @Column(name = "domain")
+    private String domain;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="code_id")
+    private ProfessorsCodes professorsCodes;
+
+
+    public Users(String firstName, String lastName, String email, String password, int role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.role = role;
     }
+    public Users(String firstName, String lastName, String email, String encodedPassword, int role, String domain, int year) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = encodedPassword;
+        this.role = role;
+        this.domain = domain;
+        this.year= year;
+
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public String getDomain() {
+        return domain;
+    }
+
+    public void setDomain(String domain) {
+        this.domain = domain;
+    }
+
+    public Users() {
+    }
+
+    public Users(Set<Assignment> assignments, String firstName, String lastName, String email, String password, int role, int year, String domain, Set<AssignationStudentTask> assignation) {
+        this.assignments = assignments;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.year = year;
+        this.domain = domain;
+        this.assignation = assignation;
+    }
+
+    @OneToMany(mappedBy = "user",
+    fetch = FetchType.LAZY,
+    cascade = CascadeType.REMOVE)
+    Set<AssignationStudentTask> assignation = new HashSet<>();
 
     public long getId() {
         return id;
@@ -65,6 +131,14 @@ public class Users implements UserDetails {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
     }
 
     @Override

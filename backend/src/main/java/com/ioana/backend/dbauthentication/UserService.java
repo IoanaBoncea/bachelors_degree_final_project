@@ -4,7 +4,8 @@ import java.util.List;
 
 public interface UserService {
     List<Users> findAllUsers();
-    Users finById(long id);
+    Users findById(long id);
+    Users findByRole(int role);
     Users insert(Users user);
     boolean delete(long id);
     boolean update(Users user);

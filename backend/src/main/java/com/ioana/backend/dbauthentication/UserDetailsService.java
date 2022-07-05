@@ -16,7 +16,7 @@ public class UserDetailsService implements org.springframework.security.core.use
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
+        System.out.println("Load user");
         Users user = usersRepository.findByEmail(username);
         if (user == null) {
             throw new UsernameNotFoundException(username);
@@ -31,8 +31,14 @@ public class UserDetailsService implements org.springframework.security.core.use
     }
 
     @Override
-    public Users finById(long id) {
+    public Users findById(long id) {
         Optional<Users> result = usersRepository.findById(id);
+        return result.orElse(null);
+    }
+
+    @Override
+    public Users findByRole(int role) {
+        Optional<Users> result = Optional.ofNullable(usersRepository.findByRole(role));
         return result.orElse(null);
     }
 
