@@ -1,15 +1,28 @@
-package com.ioana.backend.model;
+package com.ioana.backend.task;
+
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "tasks")
-public class Tasks {
+public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @OneToMany(mappedBy = "task",
+    fetch = FetchType.LAZY,
+    cascade = CascadeType.REMOVE)
+    Set<AssignationStudentTask> assignation = new HashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    Course course;
 
     @Column(name = "parent_id")
     private int parentId;
@@ -17,11 +30,9 @@ public class Tasks {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "description")
+    @Size(max = 2500)
+    @Column(name = "description" , length = 2500)
     private String description;
-
-    @Column(name = "id_curs")
-    private int idCurs;
 
     @Column(name = "start_date")
     private Date startDate;
@@ -29,21 +40,9 @@ public class Tasks {
     @Column(name = "due_date")
     private Date duetDate;
 
-    @Column(name = "status")// not started | in progress | done
-    private int status;
-
-    public Tasks() {
+    public Task() {
     }
 
-    public Tasks(int parentId, String title, String description, int idCurs, Date startDate, Date duetDate, int status) {
-        this.parentId = parentId;
-        this.title = title;
-        this.description = description;
-        this.idCurs = idCurs;
-        this.startDate = startDate;
-        this.duetDate = duetDate;
-        this.status = status;
-    }
 
     public long getId() {
         return id;
@@ -77,14 +76,6 @@ public class Tasks {
         this.description = description;
     }
 
-    public int getIdCurs() {
-        return idCurs;
-    }
-
-    public void setIdCurs(int idCurs) {
-        this.idCurs = idCurs;
-    }
-
     public Date getStartDate() {
         return startDate;
     }
@@ -101,11 +92,20 @@ public class Tasks {
         this.duetDate = duetDate;
     }
 
-    public int getStatus() {
-        return status;
+    public Task(Course course, int parentId, String title, String description, Date startDate, Date duetDate) {
+        this.course = course;
+        this.parentId = parentId;
+        this.title = title;
+        this.description = description;
+        this.startDate = startDate;
+        this.duetDate = duetDate;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 }

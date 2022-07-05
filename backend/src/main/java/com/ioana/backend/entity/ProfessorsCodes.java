@@ -1,9 +1,11 @@
-package com.ioana.backend.model;
+package com.ioana.backend.entity;
+
+import com.ioana.backend.dbauthentication.Users;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "professors_codes")
+@Table(name = "professors")
 public class ProfessorsCodes {
 
     @Id
@@ -12,4 +14,7 @@ public class ProfessorsCodes {
 
     @Column(name = "code")
     private String code;
+
+    @OneToOne(mappedBy = "professorsCodes")
+    private Users professor;
 }

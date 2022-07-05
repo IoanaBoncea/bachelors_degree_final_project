@@ -1,4 +1,4 @@
-package com.ioana.backend.model;
+package com.ioana.backend.entity;
 
 import javax.persistence.*;
 
