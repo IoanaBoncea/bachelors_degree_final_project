@@ -62,7 +62,10 @@ public class UsersController {
         String jwtToken = jwtUtils.generateJwtToken(authentication);
 
         Users user = (Users) authentication.getPrincipal();
-        UserDetailsImpl userDetails = new UserDetailsImpl(user.getId(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword(), user.getRole(), user.getYear(), user.getDomain());
+        UserDetailsImpl userDetails = new UserDetailsImpl(user.getId(),
+                user.getFirstName(), user.getLastName(), user.getEmail(),
+                user.getPassword(), user.getRole(), user.getYear(),
+                user.getDomain());
 
         return ResponseEntity.ok(new LoginResponse(jwtToken,
                 userDetails.getId(),
