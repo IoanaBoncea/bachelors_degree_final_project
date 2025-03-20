@@ -10,7 +10,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
@@ -24,7 +23,7 @@ public class UserDetailsImpl implements UserDetails {
     private Integer role;
     private String domain;
     private Integer year;
-
+d
     private Collection<? extends GrantedAuthority> authorities;
 
     public UserDetailsImpl(Long id, String firstName, String lastName, String email, String password, Integer role, Integer year, String domain) {

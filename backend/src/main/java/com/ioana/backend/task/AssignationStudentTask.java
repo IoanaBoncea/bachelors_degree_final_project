@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "assignments_user_task")
-public class AssignationStudentTask {
+public class  AssignationStudentTask {
 
     @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
